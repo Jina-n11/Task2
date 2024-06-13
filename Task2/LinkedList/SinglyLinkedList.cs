@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Task2.LinkedList
 {
     public class SinglyLinkedList<T>
     {
-        public Node<T>? head {  get; set; } 
-        public Node<T>? tail {  get; set; }
+        public Node<T>? head { get; set; }
+        public Node<T>? tail { get; set; }
 
         //Create Node
         public void Add(T data)
@@ -30,8 +32,8 @@ namespace Task2.LinkedList
 
         public void DisplayList() {
             Node<T> current = head;
-            while (current != null) { 
-            current.DisplayNode();
+            while (current != null) {
+                current.DisplayNode();
                 current = current._next;
             }
         }
@@ -43,13 +45,13 @@ namespace Task2.LinkedList
         public void DisplayReverseOrderList(Node<T> current)
         {
             // لمن يتحقق شرط الركيرجن حتبدي الطباعة العكسية   
-            if (current == null)  return;
+            if (current == null) return;
             DisplayReverseOrderList(current._next);
             current.DisplayNode();
 
         }
 
-        public void CountNodesInLinkedList(Node<T> current)
+        public int CountNodesInLinkedList(Node<T> current)
         {
             var countNode = 0;
             while (current != null)
@@ -57,12 +59,12 @@ namespace Task2.LinkedList
                 countNode++;
                 current = current._next;
             }
-            Console.WriteLine($"Count the nodes in linledList = {countNode}");
+            return countNode;
         }
 
-        public void AddNodeInPosition(Node<T> node , int postion , T data) 
+        public void AddNodeInPosition(Node<T> node, int postion, T data)
         {
-            
+
         }
 
         public void AddFirstNode(T data)
@@ -91,6 +93,59 @@ namespace Task2.LinkedList
                 tail._next = newNode;
                 tail = newNode;
             }
+        }
+
+        public dynamic? GetNode(int index)
+        {
+            Node<T> current = head;
+
+            if (CountNodesInLinkedList(current) > index)
+            {
+                int counter = 0;
+                while (counter < index)
+                {
+                    counter++;
+                    current = current._next;
+                }
+                return current._data;
+
+            }
+            return "out of the range";
+        }
+
+
+        public int GetIndexOfElement(T data)
+        {
+            Node<T> current = head;
+            int index = 0;
+            while (current != null)
+            {
+                if (EqualityComparer<T>.Default.Equals(current._data, data))
+                    return index;
+
+                index++;
+                current = current._next; ;
+            }
+
+            return -1;
+        }
+
+        public bool IsEmpty() => head == null;
+        public void DumpList() => head = null;
+
+
+        public void RemoveFirstElement() {
+            if (head == null) return;
+            head = head._next;
+        }
+        public void RemoveLastElement()
+        {
+            Node<T> current = head;
+            while (current._next._next != null)
+            {
+                current = current._next; 
+            }
+            current._next = null;
         }
 
     }
