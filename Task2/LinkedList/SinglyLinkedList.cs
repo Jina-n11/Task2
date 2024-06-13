@@ -79,5 +79,19 @@ namespace Task2.LinkedList
             }
         }
 
+        public void AddLastNode(T data)
+        {
+            Node<T> newNode = new Node<T>(data);
+            if (head == null)
+            {
+                head = tail = newNode;
+            }
+            else
+            {
+                tail._next = newNode;
+                tail = newNode;
+            }
+        }
+
     }
 }
