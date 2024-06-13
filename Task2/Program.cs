@@ -92,4 +92,9 @@ node.CountNodesInLinkedList(currentNode);
 
 //  4. Write a  c# program to insert a node at any position in a Singly Linked List.
 node.AddNodeInPosition(node: currentNode, postion:3 , data : 11);
+
+
+// 5. Write a  c# program to insert a node at the beginning of a Singly Linked List.
+node.AddFirstNode(7);
+node.DisplayList();
 #endregion

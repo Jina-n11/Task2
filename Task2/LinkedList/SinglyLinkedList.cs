@@ -62,7 +62,21 @@ namespace Task2.LinkedList
 
         public void AddNodeInPosition(Node<T> node , int postion , T data) 
         {
+            
+        }
 
+        public void AddFirstNode(T data)
+        {
+            Node<T> newNode = new Node<T>(data);
+            if (head == null)
+            {
+                head = tail = newNode;
+            }
+            else
+            {
+                newNode._next = head;
+                head = newNode;
+            }
         }
 
     }
