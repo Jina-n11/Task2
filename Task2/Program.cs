@@ -1,10 +1,167 @@
-﻿
+﻿using Task2.LinkedList;
+using Task2.PackageTask;
 
 
-using System.Reflection.Metadata;
-using System.Runtime.InteropServices;
-using System.Security.Claims;
-using Task2.LinkedList;
+
+#region  Selection sort
+/*
+ *  Package
+ * 
+ * Write a C# function that takes a list of packages, where each package is represented by an object
+ * with the properties Weight (an integer) and IsFragile (a boolean). Your function should sort the packages by weight in ascending order,
+ * ensuring that all fragile packages appear after all non-fragile ones. Use the selection sort algorithm for sorting
+ * 
+ */
+// create Package Class and add the data
+Packages packages = new Packages();
+
+packages.packages.Add( new Package(IsFragile: true, Weight: 37));
+packages.packages.Add( new Package(IsFragile: false, Weight: 3));
+packages.packages.Add( new Package(IsFragile: false, Weight: 7));
+packages.packages.Add( new Package(IsFragile: false, Weight: 11));
+packages.packages.Add( new Package(IsFragile: false, Weight: 31));
+packages.packages.Add( new Package(IsFragile: false, Weight: 44));
+packages.packages.Add( new Package(IsFragile: true, Weight: 8));
+
+foreach (Package package in packages.packages)
+{
+    Console.WriteLine($"Fragile: {package.isFragile}  , weight:{package.weight}");
+}
+
+Console.WriteLine("#############");
+
+
+// (Weight)جابلي هنا اوبجكت ال بكج مرتب حسب ال 
+List<Package> sortPackagelist = GetSortPackageList(packages.packages);
+
+foreach (Package package in sortPackagelist)
+{
+    Console.WriteLine($"Weight:{package.weight} ,Fragile: {package.isFragile}");
+}
+Console.WriteLine("#############");
+
+
+//  واطبعهم(Fragile) هنا افلتر اللستة مال بكج الي اجتي مرتبة حسب 
+var fragileList = sortPackagelist.Where(x=> x.isFragile);
+var nonFragileList = sortPackagelist.Where(x=> ! x.isFragile);
+
+foreach (Package package in nonFragileList)
+{
+    Console.WriteLine($"Weight:{package.weight} ,Fragile: {package.isFragile}");
+}
+
+foreach (Package package in fragileList)
+{
+    Console.WriteLine($"Weight:{package.weight} ,Fragile: {package.isFragile}");
+}
+
+/* packages = [ 3   , 8  , 4 , 1 ]
+ * 
+ * for i=0
+ *     findSmallestItem(packages)
+ *     {
+ *        for i = 0
+ *        smallest = 3
+ *             if (3  < 3)  => false
+              {
+                  smallest = packages[i].weight;
+                  smallestIndex = i;
+              }
+
+ *        for i = 1
+ *        smallest = 3
+ *             if (8  < 3)  => false
+              {
+                  smallest = packages[i].weight;
+                  smallestIndex = i;
+              }
+
+ *        for i = 2
+ *        smallest = 3
+ *             if (4  < 3) => false
+              {
+                  smallest = packages[i].weight;
+                  smallestIndex = i;
+              }
+ *        for i = 3
+ *        smallest = 3
+ *             if (1  < 3)  => true
+              {
+                  smallest =  1;
+                  smallestIndex = 3;
+              }
+ *        returne =>  smallestIndex = 3
+ *     }
+ *     
+ *     
+ *     
+ * 
+ * امررللها البكجز لست
+ * GetSortPackageList {
+ *
+ * while  packages.size > 0 {
+ * 
+ * روح الكالي اصغر عنصر وضيفليا بلستة جديدة
+ * 
+ *   sortList [1]
+ * }
+ * 
+ * }
+ * 
+ */
+
+// sort the package list by weight
+// امررللها البكجز لست
+List<Package> GetSortPackageList(List<Package> packages)
+{
+    List<Package> sortList = new List<Package>();
+
+    //  [ 3   , 8  , 4 , 1 ]
+    int indextSmallestItem = 0;
+    while (packages.Count > 0)
+    {
+       // حيلكة موقع اصغر عنصر 
+        indextSmallestItem = findSmallestItem(packages);
+        //[1 ,]
+        //هنا حيضيف اصغر عنصر حسب موقع الي لكيته
+        sortList.Add(packages[indextSmallestItem]);
+
+        //هنا احذفة من اللستة الاصلية حتى لمن ارجع اجيب اصغر عنصر ميتكرر ويصير اللوجك غلط
+        packages.Remove(packages[indextSmallestItem]);
+    }
+
+    return sortList;    
+}
+
+
+
+
+// ارجع اندكس لاصغر عنصر جايني من لست البكج
+int findSmallestItem(List<Package> packages)
+{
+    //3
+    var smallest = packages[0].weight;
+    int smallestIndex = 0;
+
+    //[3, 8, 4, 1]
+    // هنا نسوي لوب ع لست البكج و نسوي سورت الها لاصغر عنصر
+    for (int i= 0; i< packages.Count; i++)
+    {
+        //شرط  ايجاد اصغر عنصر والرجاعه
+        if (packages[i].weight < smallest)
+        {
+            smallest = packages[i].weight;
+            //موقع اصغر عنصر
+            smallestIndex = i;
+        }
+    }
+    return smallestIndex;
+}
+
+#endregion
+
+
+
 
 #region  linkedList
 

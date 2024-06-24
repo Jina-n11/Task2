@@ -13,7 +13,7 @@ namespace Task2.LinkedList
     {
         public Node<T>? head { get; set; }
         public Node<T>? tail { get; set; }
-        public int ? count { get; set; }
+        public int count { get; set; } = 0;
 
         // head<=(|prev|data|next|)=>tail
         // head<=|prev|data|next|-----|prev|data|next|=>tail
@@ -128,7 +128,11 @@ namespace Task2.LinkedList
         }
 
         public bool IsEmpty() => head == null;
-        public void DumpList() => head = null;
+        public void DumpList()
+        {
+            head = null;
+            count = 0;
+        }
 
 
         public void RemoveFirstElement() {
