@@ -32,6 +32,8 @@ namespace Task2.LinkedList
                 tail = newNode;
 
                 count++;
+
+                AddToHistoryCommitFile(data);
             }
         }
 
@@ -157,7 +159,7 @@ namespace Task2.LinkedList
 
 
 
-        public void AddToHistoryCommitFile(CommitData data)
+        public void AddToHistoryCommitFile(CommitData? data)
         {
             const string commitPath = @"..\CommitHistoryFile.txt";
 
