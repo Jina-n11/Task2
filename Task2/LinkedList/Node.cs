@@ -8,11 +8,11 @@ namespace Task2.LinkedList
 {
     public class Node<T>
     {
-        public T _data { get; set; }
+        public T? _data { get; set; } 
         public Node<T>? _next { get; set; }
         public Node<T>? _prev { get; set; }
 
-        public Node(T data)
+        public Node(T? data)
         {
             _data = data;
         }

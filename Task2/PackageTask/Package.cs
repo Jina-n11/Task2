@@ -15,5 +15,6 @@ namespace Task2.PackageTask
             isFragile = IsFragile;
             weight = Weight;
         }
+
     }
 }

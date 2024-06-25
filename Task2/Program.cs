@@ -1,4 +1,5 @@
 ﻿using Task2.LinkedList;
+using Task2.LinkedList.CommitHistory;
 using Task2.PackageTask;
 
 
@@ -32,7 +33,7 @@ Console.WriteLine("#############");
 
 
 // (Weight)جابلي هنا اوبجكت ال بكج مرتب حسب ال 
-List<Package> sortPackagelist = GetSortPackageList(packages.packages);
+List<Package> sortPackagelist = packages.GetSortPackageList(packages.packages);
 
 foreach (Package package in sortPackagelist)
 {
@@ -54,121 +55,47 @@ foreach (Package package in fragileList)
 {
     Console.WriteLine($"Weight:{package.weight} ,Fragile: {package.isFragile}");
 }
-
-/* packages = [ 3   , 8  , 4 , 1 ]
- * 
- * for i=0
- *     findSmallestItem(packages)
- *     {
- *        for i = 0
- *        smallest = 3
- *             if (3  < 3)  => false
-              {
-                  smallest = packages[i].weight;
-                  smallestIndex = i;
-              }
-
- *        for i = 1
- *        smallest = 3
- *             if (8  < 3)  => false
-              {
-                  smallest = packages[i].weight;
-                  smallestIndex = i;
-              }
-
- *        for i = 2
- *        smallest = 3
- *             if (4  < 3) => false
-              {
-                  smallest = packages[i].weight;
-                  smallestIndex = i;
-              }
- *        for i = 3
- *        smallest = 3
- *             if (1  < 3)  => true
-              {
-                  smallest =  1;
-                  smallestIndex = 3;
-              }
- *        returne =>  smallestIndex = 3
- *     }
- *     
- *     
- *     
- * 
- * امررللها البكجز لست
- * GetSortPackageList {
- *
- * while  packages.size > 0 {
- * 
- * روح الكالي اصغر عنصر وضيفليا بلستة جديدة
- * 
- *   sortList [1]
- * }
- * 
- * }
- * 
- */
-
-// sort the package list by weight
-// امررللها البكجز لست
-List<Package> GetSortPackageList(List<Package> packages)
-{
-    List<Package> sortList = new List<Package>();
-
-    //  [ 3   , 8  , 4 , 1 ]
-    int indextSmallestItem = 0;
-    while (packages.Count > 0)
-    {
-       // حيلكة موقع اصغر عنصر 
-        indextSmallestItem = findSmallestItem(packages);
-        //[1 ,]
-        //هنا حيضيف اصغر عنصر حسب موقع الي لكيته
-        sortList.Add(packages[indextSmallestItem]);
-
-        //هنا احذفة من اللستة الاصلية حتى لمن ارجع اجيب اصغر عنصر ميتكرر ويصير اللوجك غلط
-        packages.Remove(packages[indextSmallestItem]);
-    }
-
-    return sortList;    
-}
-
-
-
-
-// ارجع اندكس لاصغر عنصر جايني من لست البكج
-int findSmallestItem(List<Package> packages)
-{
-    //3
-    var smallest = packages[0].weight;
-    int smallestIndex = 0;
-
-    //[3, 8, 4, 1]
-    // هنا نسوي لوب ع لست البكج و نسوي سورت الها لاصغر عنصر
-    for (int i= 0; i< packages.Count; i++)
-    {
-        //شرط  ايجاد اصغر عنصر والرجاعه
-        if (packages[i].weight < smallest)
-        {
-            smallest = packages[i].weight;
-            //موقع اصغر عنصر
-            smallestIndex = i;
-        }
-    }
-    return smallestIndex;
-}
-
 #endregion
 
-
-
+Console.WriteLine("#####################################");
 
 #region  linkedList
 
-string typeLinkedList = TypeLinkedList.DoublyLinkedList.ToString();
+string typeLinkedList = TypeLinkedList.CommitHistory.ToString();
 
 switch (typeLinkedList)
 {
+
+    case "CommitHistory":
+        {
+            #region CommitHistory
+            CommitHistory<CommitData> commitHistory = new CommitHistory<CommitData>();
+            CommitData commit = new CommitData( Message:"first commit" , Auther:"jinana@gmail.com");  
+
+            commitHistory.Add(
+                new CommitData( Message: "first commit", Auther: "jinana@gmail.com")
+             );
+
+
+            commitHistory.Add(
+                new CommitData( Message: "second commit", Auther: "jinana2@gmail.com")
+                );
+
+
+            commitHistory.Add(
+                new CommitData( Message: "third commit", Auther: "jinana3@gmail.com")
+                );
+
+            commitHistory.Add(
+        new CommitData(Message: "fourth commit", Auther: "jinana4@gmail.com")
+        );
+
+            commitHistory.DisplayList();
+            #endregion
+        }
+        break;
+
+
     case "SinglyLinkedList": {
 
             #region  SinglyLinkedList
@@ -361,6 +288,7 @@ switch (typeLinkedList)
             #endregion
         }
         break;
+
 }
 
 #endregion
