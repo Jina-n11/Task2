@@ -58,118 +58,56 @@ namespace Task2.LinkedList
         }
 
 
-        public dynamic? GetNode(int index)
+        public CommitData? GetCommitById(string? id)
         {
             Node<CommitData> current = head;
 
-            if (count > index || index < 0)
-            {
-                int counter = 0;
-                while (counter < index)
-                {
-                    counter++;
-                    current = current._next;
-                }
-                return current._data;
-
-            }
-            return "out of the range";
-        }
-
-
-        //public int GetIndexOfElement(T data)
-        //{
-        //    Node<CommitData> current = head;
-        //    int index = 0;
-        //    while (current != null)
-        //    {
-        //        if (EqualityComparer<CommitData>.Default.Equals(current._data, data))
-        //            return index;
-
-        //        index++;
-        //        current = current._next; ;
-        //    }
-
-        //    return -1;
-        //}
-
-        public void AddFirstNode(CommitData data)
-        {
-            Node<CommitData> newNode = new Node<CommitData>(data);
-            if (head == null)
-            {
-                head = tail = newNode;
-                count++;
-            }
-            else
-            {
-                // head <==| prev | data | next |---| prev | data | next | -----| prev | data | next |=> tail
-                newNode._next = head;
-                head = newNode;
-                count++;
-            }
-        }
-
-
-        public void AddNodeInPosition(int postion, CommitData data)
-        {
-            Node<CommitData> current = head;
-            Node<CommitData> newNode = new Node<CommitData>(data);
-            int index = 0;
-
-            if (postion < 0)
-            {
-                AddFirstNode(data);
-            }
-            else
-            {
                 while (current != null)
                 {
-                    if (postion == index)
+                    if (current._data.id == id)
                     {
-                        //postion = 2
-                        // 0---1---2---3
-                        // 0---1---node -- 2---3
-                        // head <==| prev | data | next |---| prev | data | next | --| prev | data | next |--| prev | data | next |=> tail
-                        // head <==| prev | data | next |---| prev | data | next | -  | |newNode| |    -| prev | data | next |--| prev | data | next |=> tail
-                        newNode._next = current;
-                        newNode._prev = current._prev;
-                        current._prev._next = newNode;
-
-
+                        return current._data;
                     }
-                    index++;
                     current = current._next;
                 }
 
-                count++;
-            }
+            return null;
         }
-        public void RemoveNodeInPosition(int postion)
+
+        public CommitData? GetCommitByMessage(string? message)
         {
             Node<CommitData> current = head;
-            int index = 0;
 
             while (current != null)
             {
-                if (postion == index)
+                if (current._data.message == message)
                 {
-                    current._prev._next = current._next;
-                    current._next = null;
+                    return current._data;
                 }
-                index++;
                 current = current._next;
             }
 
-            count++;
+            return null;
         }
 
+
+        public void AddNewCommit(CommitData data , string referenceTo)
+        {
+            data.referenceTo = referenceTo;
+            Node<CommitData> newNode = new Node<CommitData>(data);
+
+                tail._next = newNode;
+                newNode._prev = tail;
+                tail = newNode;
+                count++;
+
+                AddToHistoryCommitFile(data);
+        }
 
 
         public void AddToHistoryCommitFile(CommitData data)
         {
             const string commitPath = @"File\CommitHistoryFile.txt";
-
             try
             {
                 string descripation = $"{data.id}\n message: {data.message}\n Auther : {data.auther}\n DateTime: {data.dateTime}\n ReferenceTo: {data.referenceTo} \n ############################## \n";

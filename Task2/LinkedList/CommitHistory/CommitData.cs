@@ -14,9 +14,9 @@ namespace Task2.LinkedList.CommitHistory
         public string? auther { get; set; }
         public DateTime? dateTime { get; set; }
 
-        public CommitData(string? Message, string? Auther)
+        public CommitData(string? Message, string? Auther , string? Id = null)
         {
-            id = Guid.NewGuid().ToString();
+            id = Id != null ? Id : Guid.NewGuid().ToString();
             //referenceTo = ReferenceTo;
             message = Message;
             auther = Auther;

@@ -59,6 +59,11 @@ foreach (Package package in fragileList)
 
 Console.WriteLine("#####################################");
 
+
+
+
+
+
 #region  linkedList
 
 string typeLinkedList = TypeLinkedList.CommitHistory.ToString();
@@ -78,7 +83,7 @@ switch (typeLinkedList)
 
 
             commitHistory.Add(
-                new CommitData( Message: "second commit", Auther: "jinana2@gmail.com")
+                new CommitData( Message: "second commit", Auther: "jinana2@gmail.com" , Id: "37")
                 );
 
 
@@ -91,6 +96,17 @@ switch (typeLinkedList)
         );
 
             commitHistory.DisplayList();
+            Console.WriteLine("#####################################");
+
+            var commitData = commitHistory.GetCommitById(id: "37");
+            commitHistory.AddNewCommit(new CommitData(Message: "new commit", Auther: "jinana5@gmail.com"), referenceTo: commitData.id);
+            commitHistory.DisplayList();
+            Console.WriteLine("#####################################");
+
+            var result = commitHistory.GetCommitByMessage(message: "first commit");
+            commitHistory.AddNewCommit(new CommitData(Message: "the new commit", Auther: "jinana9@gmail.com"), referenceTo: result.id);
+            commitHistory.DisplayList();
+            Console.WriteLine("#####################################");
             #endregion
         }
         break;
