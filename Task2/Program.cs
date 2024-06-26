@@ -78,35 +78,38 @@ switch (typeLinkedList)
             CommitData commit = new CommitData( Message:"first commit" , Auther:"jinana@gmail.com");  
 
             commitHistory.Add(
-                new CommitData( Message: "first commit", Auther: "jinana@gmail.com")
+                new CommitData( Message: "1 commit", Auther: "jinana@gmail.com")
              );
 
 
             commitHistory.Add(
-                new CommitData( Message: "second commit", Auther: "jinana2@gmail.com" , Id: "37")
+                new CommitData( Message: "2 commit", Auther: "jinana2@gmail.com" , Id: "37")
                 );
 
 
             commitHistory.Add(
-                new CommitData( Message: "third commit", Auther: "jinana3@gmail.com")
+                new CommitData( Message: "3 commit", Auther: "jinana3@gmail.com")
                 );
 
             commitHistory.Add(
-        new CommitData(Message: "fourth commit", Auther: "jinana4@gmail.com")
+        new CommitData(Message: "4 commit", Auther: "jinana4@gmail.com")
         );
 
             commitHistory.DisplayList();
             Console.WriteLine("#####################################");
+            Console.WriteLine();
 
             var commitData = commitHistory.GetCommitById(id: "37");
             commitHistory.AddNewCommit(new CommitData(Message: "new commit", Auther: "jinana5@gmail.com"), referenceTo: commitData.id);
             commitHistory.DisplayList();
             Console.WriteLine("#####################################");
+            Console.WriteLine();
 
-            var result = commitHistory.GetCommitByMessage(message: "first commit");
+            var result = commitHistory.GetCommitByMessage(message: "1 commit");
             commitHistory.AddNewCommit(new CommitData(Message: "the new commit", Auther: "jinana9@gmail.com"), referenceTo: result.id);
             commitHistory.DisplayList();
             Console.WriteLine("#####################################");
+            Console.WriteLine();
             #endregion
         }
         break;
