@@ -107,14 +107,14 @@ namespace Task2.LinkedList
 
         public void AddToHistoryCommitFile(CommitData data)
         {
-            const string commitPath = @"../../../File/CommitHistoryFile.txt";
-            if (!Directory.Exists("../../../File/"))
+            const string commitPath = @"../../../LinkedList/CommitHistory/CommitHistoryFile.txt";
+            if (!Directory.Exists("../../../LinkedList/CommitHistory/"))
             {
-                Directory.CreateDirectory("../../../File/");
+                Directory.CreateDirectory("../../../LinkedList/CommitHistory/");
             }
             try
             {
-                string descripation = $"{data.id}\n message: {data.message}\n Auther : {data.auther}\n DateTime: {data.dateTime}\n ReferenceTo: {data.referenceTo} \n ############################## \n";
+                string descripation = $"\n{data.id}\n message: {data.message}\n Auther : {data.auther}\n DateTime: {data.dateTime}\n ReferenceTo: {data.referenceTo} \n ############################## \n \n";
                 File.AppendAllText(commitPath, descripation);
             }
             catch (Exception)

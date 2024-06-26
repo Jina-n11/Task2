@@ -1,67 +1,40 @@
 ﻿using Task2.LinkedList;
 using Task2.LinkedList.CommitHistory;
 using Task2.PackageTask;
+using Task2.ShipmentTask;
 
 
 
-#region  Selection sort
-/*
- *  Package
+#region Shipment
+/*Write a C# program that simulates the loading and unloading of shipments using a stack. 
+ * The program should use recursion to process the unloading of shipments.
+
+
+Details:
+Each shipment can be represented by a unique integer ID.
+The order of loading shipments is provided as a list of integers.
+The program should recursively unload shipments and display each step.
+company deals with numerous shipments that must be processed in a specific order due to the constraints of loading and unloading. 
+Each shipment has to be loaded in the order it arrives and unloaded in the reverse order (Last In, First Out).
  * 
- * Write a C# function that takes a list of packages, where each package is represented by an object
- * with the properties Weight (an integer) and IsFragile (a boolean). Your function should sort the packages by weight in ascending order,
- * ensuring that all fragile packages appear after all non-fragile ones. Use the selection sort algorithm for sorting
  * 
  */
-// create Package Class and add the data
-Packages packages = new Packages();
 
-packages.packages.Add( new Package(IsFragile: true, Weight: 37));
-packages.packages.Add( new Package(IsFragile: false, Weight: 3));
-packages.packages.Add( new Package(IsFragile: false, Weight: 7));
-packages.packages.Add( new Package(IsFragile: false, Weight: 11));
-packages.packages.Add( new Package(IsFragile: false, Weight: 31));
-packages.packages.Add( new Package(IsFragile: false, Weight: 44));
-packages.packages.Add( new Package(IsFragile: true, Weight: 8));
+Shipments shipments = new Shipments();
 
-foreach (Package package in packages.packages)
-{
-    Console.WriteLine($"Fragile: {package.isFragile}  , weight:{package.weight}");
-}
+List<Shipment> listOfShipment = new List<Shipment>();
 
-Console.WriteLine("#############");
+shipments.AddShipments();
+Console.WriteLine("####### - Loading Shipments - #######");
+shipments.DisplayLoadingShipments();
+Console.WriteLine("####### - UnLoading Shipments - #######");
+shipments.DisplayUnloadingShipments();
+Console.WriteLine("###############");
 
-
-// (Weight)جابلي هنا اوبجكت ال بكج مرتب حسب ال 
-List<Package> sortPackagelist = packages.GetSortPackageList(packages.packages);
-
-foreach (Package package in sortPackagelist)
-{
-    Console.WriteLine($"Weight:{package.weight} ,Fragile: {package.isFragile}");
-}
-Console.WriteLine("#############");
-
-
-//  واطبعهم(Fragile) هنا افلتر اللستة مال بكج الي اجتي مرتبة حسب 
-var fragileList = sortPackagelist.Where(x=> x.isFragile);
-var nonFragileList = sortPackagelist.Where(x=> ! x.isFragile);
-
-foreach (Package package in nonFragileList)
-{
-    Console.WriteLine($"Weight:{package.weight} ,Fragile: {package.isFragile}");
-}
-
-foreach (Package package in fragileList)
-{
-    Console.WriteLine($"Weight:{package.weight} ,Fragile: {package.isFragile}");
-}
 #endregion
 
+
 Console.WriteLine("#####################################");
-
-
-
-
 
 
 #region  linkedList
@@ -75,7 +48,7 @@ switch (typeLinkedList)
         {
             #region CommitHistory
             CommitHistory<CommitData> commitHistory = new CommitHistory<CommitData>();
-            CommitData commit = new CommitData( Message:"first commit" , Auther:"jinana@gmail.com");  
+             
 
             commitHistory.Add(
                 new CommitData( Message: "1 commit", Auther: "jinana@gmail.com")
@@ -310,4 +283,59 @@ switch (typeLinkedList)
 
 }
 
+#endregion
+
+Console.WriteLine("###############################################");
+
+#region  Selection sort
+/*
+ *  Package
+ * 
+ * Write a C# function that takes a list of packages, where each package is represented by an object
+ * with the properties Weight (an integer) and IsFragile (a boolean). Your function should sort the packages by weight in ascending order,
+ * ensuring that all fragile packages appear after all non-fragile ones. Use the selection sort algorithm for sorting
+ * 
+ */
+// create Package Class and add the data
+Packages packages = new Packages();
+
+packages.packages.Add(new Package(IsFragile: true, Weight: 37));
+packages.packages.Add(new Package(IsFragile: false, Weight: 3));
+packages.packages.Add(new Package(IsFragile: false, Weight: 7));
+packages.packages.Add(new Package(IsFragile: false, Weight: 11));
+packages.packages.Add(new Package(IsFragile: false, Weight: 31));
+packages.packages.Add(new Package(IsFragile: false, Weight: 44));
+packages.packages.Add(new Package(IsFragile: true, Weight: 8));
+
+foreach (Package package in packages.packages)
+{
+    Console.WriteLine($"Fragile: {package.isFragile}  , weight:{package.weight}");
+}
+
+Console.WriteLine("#############");
+
+
+// (Weight)جابلي هنا اوبجكت ال بكج مرتب حسب ال 
+List<Package> sortPackagelist = packages.GetSortPackageList(packages.packages);
+
+foreach (Package package in sortPackagelist)
+{
+    Console.WriteLine($"Weight:{package.weight} ,Fragile: {package.isFragile}");
+}
+Console.WriteLine("#############");
+
+
+//  واطبعهم(Fragile) هنا افلتر اللستة مال بكج الي اجتي مرتبة حسب 
+var fragileList = sortPackagelist.Where(x => x.isFragile);
+var nonFragileList = sortPackagelist.Where(x => !x.isFragile);
+
+foreach (Package package in nonFragileList)
+{
+    Console.WriteLine($"Weight:{package.weight} ,Fragile: {package.isFragile}");
+}
+
+foreach (Package package in fragileList)
+{
+    Console.WriteLine($"Weight:{package.weight} ,Fragile: {package.isFragile}");
+}
 #endregion
