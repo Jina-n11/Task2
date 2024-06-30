@@ -1,7 +1,17 @@
-﻿using Task2.LinkedList;
+﻿using Task2.Editor;
+using Task2.LinkedList;
 using Task2.LinkedList.CommitHistory;
 using Task2.PackageTask;
 using Task2.ShipmentTask;
+
+
+
+
+Editor<string> editor = new Editor<string>(Data: ["jhjhjhj" ,"jjkjjk"]);
+
+editor.Push("hjhdjfh");
+editor.Push("ccccc");
+editor.pop();
 
 
 

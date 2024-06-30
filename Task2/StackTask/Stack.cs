@@ -14,19 +14,19 @@ namespace Task2.StackTask
         private List<T>? items = new List<T>(7);
         private int top = 0;
 
-        public Stack(List<T> Items) 
+        public Stack(List<T> Items)
         {
             items = Items;
         }
 
-        public void push( T data)
+        public void push(T data)
         {
             if (isOverFlow())
             {
                 Console.WriteLine("Stack Overflow");
             }
-            else 
-            { 
+            else
+            {
                 items?.Add(data);
                 top++;
             }
@@ -59,7 +59,7 @@ namespace Task2.StackTask
             }
             else
             {
-                foreach (var item in this.items.OrderByDescending(item=> item))
+                foreach (var item in this.items.OrderByDescending(item => item))
                 {
                     Console.WriteLine($"{item}");
                 }
@@ -89,7 +89,7 @@ namespace Task2.StackTask
             }
             else
             {
-                for(int i = top; i > 0; i++)
+                for (int i = top; i > 0; i++)
                 {
                     Console.WriteLine($"{items[i]}");
                 }
@@ -113,7 +113,7 @@ namespace Task2.StackTask
                 // 
                 while (startItemPostion < endItemPostion)
                 {
-                  // عمليةالسوابنك
+                    // عمليةالسوابنك
                     temp = this.items[startItemPostion];
                     this.items[startItemPostion] = items[endItemPostion];
                     this.items[endItemPostion] = temp;
@@ -135,21 +135,21 @@ namespace Task2.StackTask
             if (isEmpty())
             {
                 Console.WriteLine("Stack is empty");
-               
+
             }
             else
             {
                 // 
-                for (int i = 0; i<this.items.Count;i++)
+                for (int i = 0; i < this.items.Count; i++)
                 {
 
                     // item is less than minimumItem
-                    if (Comparer<T>.Default.Compare(this.items[firstItemPostion] , minimumItem) < 0) 
+                    if (Comparer<T>.Default.Compare(this.items[firstItemPostion], minimumItem) < 0)
                     {
                         minimumItem = this.items[firstItemPostion];
                     }
                 }
-                
+
             }
 
             return minimumItem;
@@ -173,7 +173,7 @@ namespace Task2.StackTask
                 for (int i = 0; i < this.items.Count; i++)
                 {
                     // item is greater than  maximumItem
-                    if (Comparer<T>.Default.Compare(this.items[firstItemPostion] , maximumItem) > 0)
+                    if (Comparer<T>.Default.Compare(this.items[firstItemPostion], maximumItem) > 0)
                     {
                         maximumItem = this.items[firstItemPostion];
                     }
@@ -202,8 +202,8 @@ namespace Task2.StackTask
             }
         }
 
-        public void RemoveStack() 
-        { 
+        public void RemoveStack()
+        {
             this.items.Clear();
 
             top = -1;
@@ -223,18 +223,18 @@ namespace Task2.StackTask
                 //هنا معناه متشابهين
                 if (Comparer<T>.Default.Compare(item, data) == 0)
                 {
-                    count++; 
+                    count++;
                 }
-            
+
             }
             return count;
         }
 
         public void RemoveDuplicateItems()
         {
-            List<T>? list =  this.items ;
-          list.Order();
-            for (int i = 0; i< list.Count()- 1; i++ )
+            List<T>? list = this.items;
+            list.Order();
+            for (int i = 0; i < list.Count() - 1; i++)
             {
                 // متشابهين
                 if (Comparer<T>.Default.Compare(list[i], list[i + 1]) == 0)
@@ -244,7 +244,7 @@ namespace Task2.StackTask
                      *  6==6
                      *    remove list[i] = [6 6 8]
                      */
-                    list.RemoveAt(i);   
+                    list.RemoveAt(i);
                     top--;
                 }
             }
