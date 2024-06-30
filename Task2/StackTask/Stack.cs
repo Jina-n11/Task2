@@ -12,7 +12,7 @@ namespace Task2.StackTask
     public class Stack<T>
     {
         private List<T>? items = new List<T>(7);
-        public int top = 0;
+        private int top = 0;
 
         public Stack(List<T> Items) 
         {
@@ -202,7 +202,53 @@ namespace Task2.StackTask
             }
         }
 
+        public void RemoveStack() 
+        { 
+            this.items.Clear();
 
+            top = -1;
+        }
+        public int SizeOfStack() => top;
+        public void RemoveItem(int index)
+        {
+            this.items.RemoveAt(index);
+            top--;
+        }
+
+        public int CountItem(T data)
+        {
+            int count = 0;
+            foreach (var item in this.items)
+            {
+                //هنا معناه متشابهين
+                if (Comparer<T>.Default.Compare(item, data) == 0)
+                {
+                    count++; 
+                }
+            
+            }
+            return count;
+        }
+
+        public void RemoveDuplicateItems()
+        {
+            List<T>? list =  this.items ;
+          list.Order();
+            for (int i = 0; i< list.Count()- 1; i++ )
+            {
+                // متشابهين
+                if (Comparer<T>.Default.Compare(list[i], list[i + 1]) == 0)
+                {
+                    /*[6 6 6 8]
+                     * i=0
+                     *  6==6
+                     *    remove list[i] = [6 6 8]
+                     */
+                    list.RemoveAt(i);   
+                    top--;
+                }
+            }
+        }
 
     }
 }
